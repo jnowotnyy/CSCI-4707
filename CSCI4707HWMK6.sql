@@ -16,7 +16,7 @@ create table if not exists bowling.Game (
 AlleyPhoneNum varchar(15),
 Time varchar(100),
 LaneNum varchar(3),
-constraint pk_Game primary key (Time, LaneNum),
+constraint pk_Game primary key (AlleyPhoneNum, Time, LaneNum),
 constraint fk_Game_AlleyPhoneNum foreign key (AlleyPhoneNum) references bowling.Alley(PhoneNum)
 );
 insert into bowling.Game (AlleyPhoneNum, Time, LaneNum)
@@ -125,7 +125,7 @@ constraint fk_Dish foreign key (R_name, CategoryName) references menu.Category(R
 insert into menu.Dish values
 ('Sally''s', 'Appetizers', 'Sally"s Wings', 'oven baked...bleu cheese.', NULL),
 ('Sally''s', 'Appetizers', 'Nachos', 'cheese...friendly', NULL),
-('Sally''s', 'Sandwiches & Wraps', 'Smoked Pork Sandwich', 'smoked...bun.', NULL);
+('Sally''s', 'Sandwiches & Wraps', 'Smoked Pork Sandwich', 'smoked...bun.', NULL),
 ('Sally''s', 'Saloon Daily Specials', 'Street Taco Tuesday', NULL, NULL);
 
 -- Dish Price Table 
