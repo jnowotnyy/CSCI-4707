@@ -54,7 +54,7 @@ LineGameLaneNum, LinePlayerNum, FrameNum),
 constraint uk_Frame_Roll1Score unique (Roll1Score),
 constraint uk_Frame_Roll2Score unique (Roll2Score),
 constraint uk_Frame_Roll3Score unique (Roll3Score),
-constraint uk_Frame_isSplit unique (isSplit),
+constraint uk_Frame_isSplit (isSplit),
 constraint fk_Frame foreign key (LineAlleyPhoneNum, LineGameTime, LineGameLaneNum, LinePLayerNum) references bowling.Line(GameAlleyPhoneNum, GameTime, GameLaneNum, PlayerNum)
 );
 insert into bowling.Frame values
@@ -99,7 +99,7 @@ R_Name varchar(100),
 Name varchar(50),
 Cost varchar(20) not null,
 constraint pk_Upgrade primary key (R_Name, Name),
-constraint uk_Upgrade_Cost unique (Cost),
+constraint uk_Upgrade_Cost (Cost),
 constraint fk_Upgrade_R_Name foreign key (R_Name) references menu.Menu(Restaurant_Name)
 );
 insert into menu.Upgrade values
@@ -136,7 +136,7 @@ DishTitle varchar(50),
 Size varchar(50),
 Cost varchar(20) not null,
 constraint pk_DishPrice primary key (R_name, CategoryName, DishTitle, Size),
-constraint uk_DishPrice_Cost unique (Cost),
+constraint uk_DishPrice_Cost (Cost),
 constraint fk_DishPrice foreign key (R_name, CategoryName, DishTitle) references menu.Dish(R_name, CategoryName, Title)
 );
 insert into menu.DishPrice values
