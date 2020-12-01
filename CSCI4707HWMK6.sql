@@ -8,7 +8,7 @@ Name varchar(100) not null,
 constraint pk_Alley primary key (PhoneNum),
 constraint uk_Alley_Name unique (Name)
 );
-insert into Alley (PhoneNum, Name)
+insert into bowling.Alley (PhoneNum, Name)
     values ('763-503-2695', 'Brunswick Zone Brooklyn Park');
     
 /* Game Table */    
@@ -20,7 +20,7 @@ LaneNum varchar(3),
 constraint pk_Game primary key (Time, LaneNum),
 constraint fk_Game_AlleyPhoneNum foreign key (AlleyPhoneNum) references bowling.Alley(PhoneNum)
 );
-insert into Game (AlleyPhoneNum, Time, LaneNum)
+insert into bowling.Game (AlleyPhoneNum, Time, LaneNum)
     values ('763-503-2695', '1567952467', '43');
     
 /* Line Table */
@@ -35,7 +35,7 @@ constraint pk_Line primary key (GameAlleyPhoneNum, GameTime, GameLaneNum, Player
 constraint uk_Line_PlayerName unique (PlayerName),
 constraint fk_Line foreign key (GameAlleyPhoneNum, GameTime, GameLaneNum) references bowling.Game(AlleyPhoneNum, Time, LaneNum)
 );
-insert into Line values
+insert into bowling.Line values
 ('763-503-2695','1567952467', 43, 2, 'MADDIE'),
 ('763-503-2695','1567952467', 43, 1, 'COOPER'),
 ('763-503-2695','1567952467', 43, 3, 'DAD');
@@ -60,7 +60,7 @@ constraint uk_Frame_Roll3Score unique (Roll3Score),
 constraint uk_Frame_isSplit unique (isSplit),
 constraint fk_Frame foreign key (LineAlleyPhoneNum, LineGameTime, LineGameLaneNum, LinePLayerNum) references bowling.Line(GameAlleyPhoneNum, GameTime, GameLaneNum)
 );
-insert into Frame values
+insert into bowling.Frame values
 ('763-503-2695','1567952467', 43, 2, 2, 0, 9, NULL, FALSE),
 ('763-503-2695','1567952467', 43, 2, 8, 10, NULL, NULL, FALSE),
 ('763-503-2695','1567952467', 43, 1, 6, 8, 0, NULL, TRUE),
