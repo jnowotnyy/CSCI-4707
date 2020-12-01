@@ -55,7 +55,7 @@ constraint uk_Frame_Roll1Score unique (Roll1Score),
 constraint uk_Frame_Roll2Score unique (Roll2Score),
 constraint uk_Frame_Roll3Score unique (Roll3Score),
 constraint uk_Frame_isSplit unique (isSplit),
-constraint fk_Frame foreign key (LineAlleyPhoneNum, LineGameTime, LineGameLaneNum, LinePLayerNum) references bowling.Line(GameAlleyPhoneNum, GameTime, GameLaneNum)
+constraint fk_Frame foreign key (LineAlleyPhoneNum, LineGameTime, LineGameLaneNum, LinePLayerNum) references bowling.Line(GameAlleyPhoneNum, GameTime, GameLaneNum, PlayerNum)
 );
 insert into bowling.Frame values
 ('763-503-2695','1567952467', 43, 2, 2, 0, 9, NULL, FALSE),
@@ -161,7 +161,7 @@ constraint uk_Special_endTime unique (endTime),
 constraint fk_Special foreign Key (R_name, CategoryName, DishTitle) references menu.Dish(R_name, CategoryName, Title)
 --Foreign Relation to Category is implied through Dish Relation
 );
-insert into Special (R_name, CategoryName, DishTitle, {weekDay}, startTime, endTime) 
+insert into Special (R_name, CategoryName, DishTitle, weekDay, startTime, endTime) 
 	values ('Sally''s', 'Saloon Daily Specials', 'Street Taco Tuesday', 'Tuesday', '5pm', 'Midnight');
 
 -- CategoryUpgrade 
