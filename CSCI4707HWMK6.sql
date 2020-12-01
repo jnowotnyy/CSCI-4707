@@ -1,6 +1,6 @@
 drop schema bowling cascade;
 create schema if not exists bowling;
-/* Alley Table */
+-- Alley Table 
 set search_path to 'bowling';
 create table if not exists bowling.Alley (
 PhoneNum varchar(15),
@@ -11,8 +11,7 @@ constraint uk_Alley_Name unique (Name)
 insert into bowling.Alley (PhoneNum, Name)
     values ('763-503-2695', 'Brunswick Zone Brooklyn Park');
     
-/* Game Table */    
-set search_path to 'bowling';
+-- Game Table     
 create table if not exists bowling.Game (
 AlleyPhoneNum varchar(15),
 Time varchar(100),
@@ -23,8 +22,7 @@ constraint fk_Game_AlleyPhoneNum foreign key (AlleyPhoneNum) references bowling.
 insert into bowling.Game (AlleyPhoneNum, Time, LaneNum)
     values ('763-503-2695', '1567952467', '43');
     
-/* Line Table */
-set search_path to 'bowling';
+-- Line Table 
 create table if not exists bowling.Line (
 GameAlleyPhoneNum varchar(15),
 GameTime varchar(100),
@@ -41,7 +39,6 @@ insert into bowling.Line values
 ('763-503-2695','1567952467', 43, 3, 'DAD');
 
 --Frame Table
-set search_path to 'bowling';
 create table if not exists bowling.Frame (
 LineAlleyPhoneNum varchar(15),
 LineGameTime varchar(100),
@@ -89,18 +86,18 @@ Name varchar(50),
 Description varchar(100),
 constraint pk_Category primary key (R_name, Name),
 constraint uk_Category_Description unique (Description),
-constraint fk_Category_R_name foreign key (R_name) references menu.Menu(Restraunt_Name)
+constraint fk_Category_R_name foreign key (R_name) references menu.Menu(Restaurant_Name)
 );
 insert into menu.Category values
 ('Sally''s', 'Appetizers', NULL),
 ('Sally''s', 'Sandwiches & Wraps', 'Served with kettle chips (unless otherwise noted)'),
 ('Sally''s', 'Saloon Daily Specials', 'Subject to change on Event Days.');
 
-/* Upgrade Table */
+-- Upgrade Table 
 create table if not exists menu.Upgrade (
 R_Name varchar(100),
 Name varchar(50),
-Cost varchar(100) not null,
+Cost varchar(20) not null,
 constraint pk_Upgrade primary key (R_Name, Name),
 constraint uk_Upgrade_Cost unique (Cost),
 constraint fk_Upgrade_R_Name foreign key (R_Name) references menu.Menu(Restaurant_Name)
@@ -113,7 +110,7 @@ insert into menu.Upgrade values
 ('Sally''s', 'Chicken', 1),
 ('Sally''s', 'Taco beef', 1);
 
-/* Dish Table */
+-- Dish Table 
 create table if not exists menu.Dish (
 R_name varchar(100),
 CategoryName varchar(50),
@@ -131,13 +128,13 @@ insert into menu.Dish values
 ('Sally''s', 'Sandwiches & Wraps', 'Smoked Pork Sandwich', 'smoked...bun.', NULL);
 ('Sally''s', 'Saloon Daily Specials', 'Street Taco Tuesday', NULL, NULL);
 
-/* Dish Price Table */
+-- Dish Price Table 
 create table if not exists menu.DishPrice (
 R_name varchar(100),
 CategoryName varchar(50),
 DishTitle varchar(50),
 Size varchar(50),
-Cost varchar(2) not null,
+Cost varchar(20) not null,
 constraint pk_DishPrice primary key (R_name, CategoryName, DishTitle, Size),
 constraint uk_DishPrice_Cost unique (Cost),
 constraint fk_DishPrice foreign key (R_name, CategoryName, DishTitle) references menu.Dish(R_name, CategoryName, Title)
@@ -149,7 +146,7 @@ insert into menu.DishPrice values
 ('Sally''s', 'Sandwiches & Wraps', 'Smoked Pork Sandwich','', 10),
 ('Sally''s', 'Saloon Daily Specials', 'Street Taco Tuesday','', 5);
 
-/* Special Table */
+-- Special Table 
 create table if not exists menu.Special (
 R_name varchar(100),
 CategoryName varchar(50),
@@ -162,12 +159,12 @@ constraint uk_Special_weekDay unique (weekDay),
 constraint uk_Special_startTime unique (startTime),
 constraint uk_Special_endTime unique (endTime),
 constraint fk_Special foreign Key (R_name, CategoryName, DishTitle) references menu.Dish(R_name, CategoryName, Title)
-/*Foreign Relation to Category is implied through Dish Relation*/
+--Foreign Relation to Category is implied through Dish Relation
 );
 insert into Special (R_name, CategoryName, DishTitle, {weekDay}, startTime, endTime) 
 	values ('Sally''s', 'Saloon Daily Specials', 'Street Taco Tuesday', 'Tuesday', '5pm', 'Midnight');
 
-/* CategoryUpgrade */
+-- CategoryUpgrade 
 create table if not exists menu.CategoryUpgrade (
 R_name varchar(100),
 CategoryName varchar(50),
@@ -180,7 +177,7 @@ insert into CategoryUpgrade values
 ('Sally''s', 'Sandwiches & Wraps', 'Tater Tots'),
 ('Sally''s', 'Sandwiches & Wraps', 'House Salad');
 
-/* DishUpgrade */
+-- DishUpgrade 
 create table if not exists menu.DishUpgrade (
 R_name varchar(100),
 CategoryName varchar(50),
