@@ -5,7 +5,7 @@ set search_path to 'bowling';
 create table if not exists bowling.Alley (
 PhoneNum varchar(15),
 Name varchar(100) not null,
-constraint pk_Alley primary key (PhoneNum),
+constraint pk_Alley primary key (PhoneNum)
 --constraint uk_Alley_Name unique (Name)
 );
 insert into bowling.Alley (PhoneNum, Name)
@@ -71,7 +71,7 @@ create table if not exists menu.Menu (
 Restaurant_Name varchar(100),
 URL varchar(100) not null,
 description varchar(100) not null,
-constraint pk_Menu primary key (Restaurant_Name),
+constraint pk_Menu primary key (Restaurant_Name)
 --constraint uk_Menu_URL unique (URL),
 --constraint uk_Menu_description unique (description)
 );
