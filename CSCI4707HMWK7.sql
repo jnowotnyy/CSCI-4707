@@ -18,7 +18,7 @@ with Airports as (
 	INNER JOIN Arrive
 	ON departed.source_airport_id  = arrive.source_airport_id
 	GROUP BY source_airport_id
-Solution as (
+), Solution as (
 	SELECT airline.name
 	FROM Combine
 	INNER JOIN airline
