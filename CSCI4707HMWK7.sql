@@ -17,7 +17,7 @@ with Airports as (
 	FROM Departed
 	INNER JOIN Arrive
 	ON departed.airline_id  = arrive.airline_id
-	GROUP BY airline_id
+	GROUP BY departed.airline_id
 ), Solution as (
 	SELECT airline.name
 	FROM Combine
@@ -76,7 +76,7 @@ with Minneapolis as (
 	ON airline.id = MN_Routes.destination_airport_id
 ), Solution as (
 	SELECT * FROM MN_Airlines
-	WHERE airline.name not like 'ALASKA'
-	GROUP BY airline.name
+	WHERE MN_Airlines.name not like 'ALASKA'
+	GROUP BY MN_Airline.name
 ) SELECT * FROM Solution;
 
