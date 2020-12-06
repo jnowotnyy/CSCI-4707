@@ -3,28 +3,32 @@ with Airports as (
 	FROM airport
 	WHERE altitude > 10000
 ), Departed as(
-	SELECT route.airline_id
-	FROM Airports
-	INNER JOIN route
-	ON route.source_airport_id = Airports.id
+	SELECT source_airport_id
+	FROM route
+	INTERSECT
+	SELECT id
+	FROM airports
 ), Arrive as(
-	SELECT route.airline_id
-	FROM Airports
-	INNER JOIN route
-	ON route.destination_airport_id = Airports.id
+	SELECT destination_airport_id
+	FROM route
+	INTERSECT
+	SELECT id
+	FROM airports
+	--
 ), Combine as (
-	SELECT Departed.airline_id
-	FROM Departed
+	SELECT airline_id
+	FROM route
+	INNER JOIN Departed
+		ON Departed.source_airport_id = route.source_airport_id
 	INNER JOIN Arrive
-	ON departed.airline_id  = arrive.airline_id
-	GROUP BY departed.airline_id
+		ON Arrive.destination_airport_id = route.destination_airport_id
+	GROUP BY airline_id
 ), Solution as (
 	SELECT airline.name
 	FROM Combine
 	INNER JOIN airline
 	ON airline.id = Combine.airline_id
-)
-SELECT * FROM Solution;
+)SELECT * FROM Solution;
 
 --PROBLEM 2
 
