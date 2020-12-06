@@ -13,10 +13,10 @@ with Airports as (
 	INNER JOIN route
 	ON route.destination_airport_id = Airports.id
 ), Combine as (
-	SELECT Departed.source_airport_id
+	SELECT Departed.airline_id
 	FROM Departed
 	INNER JOIN Arrive
-	ON departed.source_airport_id  = arrive.source_airport_id
+	ON departed.airline_id  = arrive.airline_id
 	GROUP BY source_airport_id
 ), Solution as (
 	SELECT airline.name
