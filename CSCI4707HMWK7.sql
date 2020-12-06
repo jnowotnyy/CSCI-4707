@@ -78,6 +78,7 @@ with Minneapolis as (
 	INNER JOIN MN_Airlines
 	ON airline.id = MN_Airlines.airline_id
 	WHERE airline.country not like 'ALASKA'
+	GROUP BY airline.name
 ) SELECT * FROM Solution;
 
 --Problem 4
