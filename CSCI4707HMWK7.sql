@@ -14,7 +14,6 @@ with Airports as (
 	INTERSECT
 	SELECT id
 	FROM airports
-	--
 ), Combine as (
 	SELECT airline_id
 	FROM route
@@ -68,18 +67,17 @@ with Minneapolis as (
 	SELECT id FROM airport
 	WHERE round(latitude) = 45
 	AND round(longitude) = -93
-), MN_Routes as (
-	SELECT destination_airport_id
+), MN_Airlines as (
+	SELECT route.airline_id
 	FROM Minneapolis
 	INNER JOIN route
 	ON route.source_airport_id = Minneapolis.id
-), MN_Airlines as (
+),  Solution as (
 	SELECT airline.name
-	FROM MN_Routes
-	INNER JOIN airline
-	ON airline.id = MN_Routes.destination_airport_id
-), Solution as (
-	SELECT * FROM MN_Airlines
-	WHERE MN_Airlines.name not like 'ALASKA'
+	FROM airline
+	INNER JOIN MN_Airlines
+	ON airline.id = MN_Airlines.airline_id
+	WHERE airline.country not like 'ALASKA'
 ) SELECT * FROM Solution;
 
+--Problem 4
