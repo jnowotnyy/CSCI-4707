@@ -4,7 +4,7 @@ with Airports as (
 	WHERE altitude > 10000
 ), Departed as(
 	SELECT route.airline_id
-	FROM SelectedAirports
+	FROM Airports
 	INNER JOIN route
 	ON route.source_airport_id = Airports.id
 ), Arrive as(
