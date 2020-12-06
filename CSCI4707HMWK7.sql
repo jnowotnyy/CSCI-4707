@@ -77,6 +77,5 @@ with Minneapolis as (
 ), Solution as (
 	SELECT * FROM MN_Airlines
 	WHERE MN_Airlines.name not like 'ALASKA'
-	GROUP BY MN_Airline.name
 ) SELECT * FROM Solution;
 
