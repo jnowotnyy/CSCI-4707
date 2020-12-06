@@ -46,5 +46,6 @@ with Minneapolis as (
 ), Solution as (
 	SELECT name, city, country
 	FROM airport
-	WHERE airport.id = MN_Athens_Stopover.destination_airport_id
+	INNER JOIN MN_Athens_Stopover
+	ON airport.id = MN_Athens_Stopover.destination_airport_id
 ) SELECT * FROM Solution;
