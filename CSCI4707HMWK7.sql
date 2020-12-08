@@ -83,7 +83,7 @@ with Minneapolis as (
 
 --Problem 4
 --DROP VIEW One_way_airports;
-CREATE OR REPLACE VIEW One_way_airports as 
+CREATE OR REPLACE VIEW One_Way_Airports as 
 with Z as (
 	SELECT source_airport_id, destination_airport_id
 	FROM route
@@ -98,4 +98,9 @@ with Z as (
 	INNER JOIN airport as airport2
 		ON airport2.id = Z.destination_airport_id
 ) SELECT * FROM Solution;
-SELECT * FROM One_way_airports;
+
+--Problem 5
+SELECT destination, count(destination) AS howmany
+FROM One_Way_Airports
+GROUP BY arrival
+ORDER BY howmany desc;
