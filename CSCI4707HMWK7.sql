@@ -90,7 +90,7 @@ with Z as (
 	EXCEPT
 	SELECT destination_airport_id, source_airport_id
 	FROM route
-) Solution as (
+), Solution as (
 	SELECT airport1.name, airport2.name
 	FROM Z
 	INNER JOIN airport as airport1
