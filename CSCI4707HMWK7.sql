@@ -98,3 +98,4 @@ with Z as (
 	INNER JOIN airport as airport2
 		ON airport2.id = Z.destination_airport_id
 ) SELECT * FROM Solution;
+SELECT * FROM One_way_airports;
