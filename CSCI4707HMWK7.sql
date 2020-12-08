@@ -43,12 +43,12 @@ with Minneapolis as (
 	SELECT destination_airport_id
 	FROM Minneapolis
 	INNER JOIN route
-	ON route.source_airport_id = Minneapolis.id
+		ON route.source_airport_id = Minneapolis.id
 ), Athens_Routes as (
 	SELECT source_airport_id
 	FROM Athens
 	INNER JOIN route
-	ON route.destination_airport_id = Athens.id
+		ON route.destination_airport_id = Athens.id
 ), MN_Athens_Stopover as (
 	SELECT destination_airport_id
 	FROM MN_Routes
@@ -59,7 +59,7 @@ with Minneapolis as (
 	SELECT name, city, country
 	FROM airport
 	INNER JOIN MN_Athens_Stopover
-	ON airport.id = MN_Athens_Stopover.destination_airport_id
+		ON airport.id = MN_Athens_Stopover.destination_airport_id
 ) SELECT * FROM Solution;
 
 --Problem 3
@@ -71,14 +71,30 @@ with Minneapolis as (
 	SELECT route.airline_id
 	FROM Minneapolis
 	INNER JOIN route
-	ON route.source_airport_id = Minneapolis.id
+		ON route.source_airport_id = Minneapolis.id
 ),  Solution as (
 	SELECT airline.name
 	FROM airline
 	INNER JOIN MN_Airlines
-	ON airline.id = MN_Airlines.airline_id
+		ON airline.id = MN_Airlines.airline_id
 	WHERE airline.country not like 'ALASKA'
 	GROUP BY airline.name
 ) SELECT * FROM Solution;
 
 --Problem 4
+DROP VIEW One_way_airports;
+CREATE OR REPLACE VIEW One_way_airports as 
+with Z as (
+	SELECT source_airport_id, destination_airport_id
+	FROM route
+	EXCEPT
+	SELECT destination_airport_id, source_airport_id
+	FROM route
+) Solution as (
+	SELECT airport1.name, airport2.name
+	FROM Z
+	INNER JOIN airport as airport1
+		ON airport1.id = Z.source_airport_id
+	INNER JOIN airport as airport2
+		ON airport2.id = Z.destination_airport_id
+) SELECT * FROM Solution;
