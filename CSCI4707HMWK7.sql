@@ -91,7 +91,7 @@ with Z as (
 	SELECT destination_airport_id, source_airport_id
 	FROM route
 ), Solution as (
-	SELECT airport1.name, airport2.name
+	SELECT airport1.name as source, airport2.name as destination
 	FROM Z
 	INNER JOIN airport as airport1
 		ON airport1.id = Z.source_airport_id
