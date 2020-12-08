@@ -102,5 +102,5 @@ with Z as (
 --Problem 5
 SELECT destination, count(destination) AS howmany
 FROM One_Way_Airports
-GROUP BY arrival
+GROUP BY destination
 ORDER BY howmany desc;
