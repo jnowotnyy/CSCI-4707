@@ -82,7 +82,7 @@ with Minneapolis as (
 ) SELECT * FROM Solution;
 
 --Problem 4
-DROP VIEW One_way_airports;
+--DROP VIEW One_way_airports;
 CREATE OR REPLACE VIEW One_way_airports as 
 with Z as (
 	SELECT source_airport_id, destination_airport_id
